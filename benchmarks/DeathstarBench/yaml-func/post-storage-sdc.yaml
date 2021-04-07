@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-storage-sdc
+  namespace: sdc-socialnetwork-func
+spec:
+  ports:
+  - name: http 
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    faas_function: post-storage-sdc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-storage-sdc
+  labels:
+    faas_function: post-storage-sdc
+  namespace: sdc-socialnetwork-func
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      faas_function: post-storage-sdc
+  template:
+    metadata:
+      labels: 
+        faas_function: post-storage-sdc
+      name: post-storage-sdc
+    spec:
+      containers:
+      - name: post-storage-sdc
+        image: sdcbench/socialnetwork-func-post-storage:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_/health
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_/health
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+      restartPolicy: Always
+

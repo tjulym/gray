@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: upload-text-sdc
+  namespace: sdc-socialnetwork-func
+spec:
+  ports:
+  - name: http 
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    faas_function: upload-text-sdc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upload-text-sdc
+  labels:
+    faas_function: upload-text-sdc
+  namespace: sdc-socialnetwork-func
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      faas_function: upload-text-sdc
+  template:
+    metadata:
+      labels: 
+        faas_function: upload-text-sdc
+      name: upload-text-sdc
+    spec:
+      containers:
+      - name: upload-text-sdc
+        image: sdcbench/socialnetwork-func-upload-text:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_/health
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_/health
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+      restartPolicy: Always
+

@@ -1,0 +1,74 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-op-sdc
+  namespace: sdc-socialnetwork-func
+spec:
+  type: NodePort
+  ports:
+  - name: http 
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30400
+  selector:
+    faas_function: db-op-sdc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-op-sdc
+  labels:
+    faas_function: db-op-sdc
+  namespace: sdc-socialnetwork-func
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      faas_function: db-op-sdc
+  template:
+    metadata:
+      labels: 
+        faas_function: db-op-sdc
+      name: db-op-sdc
+    spec:
+      containers:
+      - name: db-op-sdc
+        env:
+        - name: exec_timeout
+          value: 3m
+        - name: fprocess
+          value: python index.py
+        - name: handler_wait_duration
+          value: 60s
+        - name: read_timeout
+          value: 3m
+        - name: write_timeout
+          value: 3m
+        image: sdcbench/socialnetwork-func-db-op:latest
+        #image: db-op:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_/health
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_/health
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+      restartPolicy: Always
+

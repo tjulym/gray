@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sdc-socialnetwork-func
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sdc-socialnetwork-db

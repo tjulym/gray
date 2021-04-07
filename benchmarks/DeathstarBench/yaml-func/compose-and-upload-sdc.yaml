@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: compose-and-upload-sdc
+  namespace: sdc-socialnetwork-func
+spec:
+  ports:
+  - name: http 
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    faas_function: compose-and-upload-sdc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: compose-and-upload-sdc
+  labels:
+    faas_function: compose-and-upload-sdc
+  namespace: sdc-socialnetwork-func
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      faas_function: compose-and-upload-sdc
+  template:
+    metadata:
+      labels: 
+        faas_function: compose-and-upload-sdc
+      name: compose-and-upload-sdc
+    spec:
+      containers:
+      - name: compose-and-upload-sdc
+        image: sdcbench/socialnetwork-func-compose-and-upload:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_/health
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /_/health
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+      restartPolicy: Always
+
