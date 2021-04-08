@@ -1,0 +1,2 @@
+language: tensorflow-1.4.0-py3
+fprocess: python3 index.py

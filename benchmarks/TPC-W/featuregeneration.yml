@@ -1,0 +1,34 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:31112
+functions:
+  featuregeneration:
+    lang: python3-debian
+    handler: ./featuregeneration
+    image: feature-generation:latest
+    qps_per_instance: 5   #
+    limits:
+      memory: 2048Mi
+      #cpu: 2000m
+      gpu_memory: 0.4
+      gpu: 0
+    requests:
+      memory: 512Mi
+      #cpu: 100m
+      gpu_memory: 0.2
+      gpu: 0
+    constraints:
+     - "kubernetes.io/hostname=node26sdc"
+    labels:
+      com.openfaas.scale.zero: "false"
+      com.openfaas.scale.min: 1
+      com.openfaas.scale.max: 4
+      com.openfaas.cpu.bind: 10.50.11.51
+      #com.openfaas.scale.factor: 10
+    environment:
+      MODEL_NAME: mnist
+    configuration:
+      copy:
+        - ./script
+        - ./models

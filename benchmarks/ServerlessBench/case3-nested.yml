@@ -1,0 +1,14 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:31112
+functions:
+  case3-nested:
+    lang: python3-flask
+    handler: ./case3-nested
+    image: case3-nested:latest
+    environment:
+      write_timeout: 3m
+      read_timeout: 3m
+      exec_timeout: 3m
+      handler_wait_duration: 60s

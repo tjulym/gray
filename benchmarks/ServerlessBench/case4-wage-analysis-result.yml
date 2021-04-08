@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:31112
+functions:
+  case4-wage-analysis-result:
+    lang: python3-flask
+    handler: ./case4-wage-analysis-result
+    image: case4-wage-analysis-result:latest
+

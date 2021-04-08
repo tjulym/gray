@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:31112
+functions:
+  case4-store-image-metadata:
+    lang: python3-flask
+    handler: ./case4-store-image-metadata
+    image: case4-store-image-metadata:latest
+

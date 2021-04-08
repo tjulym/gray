@@ -1,0 +1,32 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:31112
+functions:
+  feature-reduce:
+    lang: python3-debian
+    handler: ./feature-reduce
+    image: feature-reduce:latest
+    qps_per_instance: 5   #
+    limits:
+      memory: 1024Mi
+      gpu_memory: 0.4
+      gpu: 0
+    requests:
+      memory: 512Mi
+      gpu_memory: 0.2
+      gpu: 0
+    constraints:
+     - "kubernetes.io/hostname=node26SDC"
+    labels:
+      com.openfaas.scale.zero: "true"
+      com.openfaas.scale.min: 0
+      com.openfaas.scale.max: 10
+      com.openfaas.cpu.bind: 0-9
+      #com.openfaas.scale.factor: 10
+    environment:
+      MODEL_NAME: mnist
+    configuration:
+      copy:
+        - ./script
+        - ./models

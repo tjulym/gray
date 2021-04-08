@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  post-storage-sdc:
+    lang: python3-flask
+    handler: ./post-storage-sdc
+    image: post-storage-sdc:latest
+

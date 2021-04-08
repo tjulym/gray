@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:31112
+functions:
+  case4-handler:
+    lang: python3-flask-debian
+    handler: ./case4-handler
+    image: case4-handler:latest
+

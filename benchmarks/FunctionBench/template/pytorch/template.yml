@@ -1,0 +1,2 @@
+language: pytorch
+fprocess: python index.py
