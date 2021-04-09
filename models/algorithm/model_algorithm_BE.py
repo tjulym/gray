@@ -86,7 +86,7 @@ class CGAN():
 
         tree = regr.estimators_[8]
         from sklearn.tree import export_graphviz
-        # 导出为dot 文件
+        # export dot file
         feature_names = []
         for i in range(16):
             feature_names.append("lc0"+"1"+str(i).zfill(2))
@@ -104,7 +104,7 @@ class CGAN():
                 rounded = True, proportion = False, 
                 precision = 2, filled = True)
 
-        # 用系统命令转为PNG文件(需要 Graphviz)
+        # use Graphviz to generate figure
         import subprocess 
         command = "dot -Tpng tree.dot -o tree.png -Gdpi=600"
         res = subprocess.check_output(command, shell=True).decode()
