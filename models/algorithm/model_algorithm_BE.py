@@ -25,7 +25,7 @@ class CGAN():
         self.model.compile(loss=['mse'], optimizer=optimizer, metrics=['accuracy'])
 
     def loaddata(self):
-        data_resource_label = pd.read_csv('data/total-result.csv', header=None)
+        data_resource_label = pd.read_csv('data/input.csv', header=None)
         data_resource_label = data_resource_label.sample(frac=1.0)
         data_resource = data_resource_label.values
 
