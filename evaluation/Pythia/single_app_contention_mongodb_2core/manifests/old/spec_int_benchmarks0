@@ -1,0 +1,12 @@
+perlbench
+bzip2
+gcc
+mcf
+gobmk
+hmmer
+sjeng
+libquantum
+h264ref
+omnetpp
+astar
+xalancbmk

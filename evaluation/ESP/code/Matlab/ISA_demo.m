@@ -1,0 +1,3 @@
+Output = singlenode_schedule('k',4,'N',1,'display',0);
+fprintf('OPT - %5.2f, EST - %5.2f, MEM - %5.2f, IPC - %5.2f, L3R - %5.2f, RND - %5.2f\n',...
+    Output.timee(1,1), Output.timee(1,2), Output.timee(1,4), Output.timee(1,5),Output.timee(1,6),Output.timee(1,7));

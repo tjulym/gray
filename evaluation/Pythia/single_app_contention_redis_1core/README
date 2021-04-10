@@ -1,0 +1,35 @@
+
+
+Scripts for generating single application induced bubble sizes.
+
+Scripts (Workflow):
+    1. build_benchmarks.sh
+        Run the appropriate commands to pre-build the benchmark suites
+    2. create_reporter_curve.sh
+        From the parent directory, run via 'srun -ppdebug create_reporter_curve.sh' to build the reporter curve on debug queue node
+        Run directly dia 'create_reporter_curve.sh' to run locally
+        The reporter curve data should be stored in the data/ directory of the parent directory
+    3. launch_reps.sh REP_COUNT
+        Launches scripts onto the cab cluster to run the
+        reporter and batch applications concurrently on a node
+    4. cat 'completed_experiements.'* > raw_data
+        Combine all the completed experiments into a single file
+    5. process.sh
+        Process the raw_data into the 'processed_data' file which is
+        then plotted by the 'plot_bubble_sizes' and 'plot_reporter_curve'
+    
+Scripts (Utilities):
+    process_experiements.sh
+        Re-run the analysis on existing performance counter data in the 'data' directory
+    process_raw_data.py
+        Aggregates data from multiple reps into a single entry for each batch application
+    run_experiments.py REP_NUMBER
+        Reads in an experiment list and runs those experiments using run_experiment.sh
+    run_experiment.sh
+        Runs a given batch application alongside the reporter application
+    generate_experiment_list.sh
+        Reads the manifests containing the batch applications and creates an
+        experiment list file for run_experiments.py
+    plot_bubble_sizes and plot_reporter_curve
+        Plot both a graph of the reporter curve and a histogram of the bubble sizes
+
