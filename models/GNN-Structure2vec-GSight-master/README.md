@@ -33,3 +33,6 @@ Run the following code to train the model for LS+LS:
 ```bash
 python train_lclc.py 
 ```
+
+## Model Result
+![Image text](https://raw.githubusercontent.com/tjulym/gray/main/models/GNN-Structure2vec-GSight-master/result.png)
