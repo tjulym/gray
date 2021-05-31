@@ -1,0 +1,35 @@
+/home/tank/anaconda3/envs/py27/bin/python /home/tank/download/dnn-binary-code-similarity-master/train_lclc.py
+=================================
+Namespace(batch_size=1, device='-1', dtype=tf.float32, embed_depth=2, embed_dim=64, epoch=1, fea_dim=16, iter_level=5, load_path=None, log_path=None, lr=0.0001, output_dim=64, save_path='./saved_model/graphnn-model')
+=================================
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE3 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX512F instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+Training start @ 2021-05-31 10:00:51.899900
+EPOCH 1/10, loss = 0.225325170477 @ 2021-05-31 10:00:55.613272
+Testing model: test auc = [0.1398521] @ 2021-05-31 10:00:59.308518
+EPOCH 2/10, loss = 0.161568141137 @ 2021-05-31 10:01:00.258744
+Testing model: test auc = [0.08802378] @ 2021-05-31 10:01:03.814652
+EPOCH 3/10, loss = 0.178333582629 @ 2021-05-31 10:01:04.750997
+Testing model: test auc = [0.20182672] @ 2021-05-31 10:01:08.287864
+EPOCH 4/10, loss = 0.17520995717 @ 2021-05-31 10:01:09.237599
+Testing model: test auc = [0.19354948] @ 2021-05-31 10:01:13.042459
+EPOCH 5/10, loss = 0.174366492163 @ 2021-05-31 10:01:13.973898
+Testing model: test auc = [0.2048424] @ 2021-05-31 10:01:17.703061
+EPOCH 6/10, loss = 0.168847800954 @ 2021-05-31 10:01:18.647942
+Testing model: test auc = [0.10506836] @ 2021-05-31 10:01:22.375437
+EPOCH 7/10, loss = 0.179041025742 @ 2021-05-31 10:01:23.308819
+Testing model: test auc = [0.17749341] @ 2021-05-31 10:01:27.013777
+EPOCH 8/10, loss = 0.17344995226 @ 2021-05-31 10:01:27.953220
+Testing model: test auc = [0.24752977] @ 2021-05-31 10:01:31.660057
+EPOCH 9/10, loss = 0.16641128513 @ 2021-05-31 10:01:32.599408
+Testing model: test auc = [0.11730171] @ 2021-05-31 10:01:36.287326
+EPOCH 10/10, loss = 0.178295274188 @ 2021-05-31 10:01:37.216218
+Testing model: test auc = [0.12110791] @ 2021-05-31 10:01:40.901727
+
+Process finished with exit code 0
+
