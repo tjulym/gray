@@ -15,14 +15,17 @@ pip install -r requirements.txt
 ## Model Implementation
 The model is implemented in `graphnnSiamese.py`.
 
-Run the following code to train the model:
+Run the following code to train the model for LS+SC/BG:
 ```bash
-python train.py
+python train_lcbe.py 
 ```
-or run `python train.py -h` to check the optional arguments.
 
-After training, run the following code to evaluate the model:
+Run the following code to train the model for SC+SC/BG:
 ```bash
-python eval.py
+python train_bebe.py 
 ```
-or run `python eval.py -h` to check the optional arguments.
+
+Run the following code to train the model for LS+LS:
+```bash
+python train_lclc.py 
+```
