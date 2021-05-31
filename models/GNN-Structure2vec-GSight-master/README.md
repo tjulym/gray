@@ -1,6 +1,10 @@
 # GNN Interference Prediction for Gsight
 This repo provides an implementation of the Gemini network for interference prediction of Gsight, which is inspired from [this paper](https://arxiv.org/abs/1708.06525).
 
+## GNN Architecture
+![Image text](https://raw.githubusercontent.com/tjulym/gray/main/models/GNN-Structure2vec-GSight-master/architecture.png)
+
+
 ## Prepration and Data
 Unzip the data by running:
 ```bash
