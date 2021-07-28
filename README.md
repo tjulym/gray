@@ -24,19 +24,30 @@ to collect metrics of corresponding functions under their solo-run. Run
 and it will create a csv file that stores the metrics under co-locating. You can edit start.sh to set the QPS of LS workloads, edit models/collector/get_ml_data.py to set the amount of data to be collected, and edit models/collector/runBEPara.py to configure tasks that co-locate with the LS of social network.
 
 ## Model Training
-The initial training dataset is in models/algorithm/data/. Run 
-```python
+The initial training dataset is in models/algorithm/data/. Run
+```bash
+pip install models/algorithm/requirements.txt
+```
+to install dependencies. Run 
+```bash
 python models/algorithm/RFR_model_training.py
 ```
-and it will create a file named "RFR" to store the RM model, and csv file to store importance of the metrics.
+to create a file named "RFR" to store the RM model, and csv file to store importance of the metrics.
 Run 
-```python
+```bash
 python models/algorithm/plots_imports.py
 ```
 to review the impurity based importance of the 16 metrics, and run 
-```python
+```bash
 python models/algorithm/plots_imports_all.py
 ```
 to show the importance of 16 metrics under all combinations of workload and server.
 
 ## Scheduler
+The example of scheduling is in scheduler/. Run
+```bash
+cd scheduler/src
+javac util/test/GsightScheduler.java
+java util.test.GsightScheduler
+```
+to show the example process of scheduling.
