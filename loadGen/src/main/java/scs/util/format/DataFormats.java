@@ -115,19 +115,38 @@ public class DataFormats {
 	 * @param p 0-1
 	 * @return
 	 */
-	public float percentile(ArrayList<Float> data,float p){
+	public float percentile(ArrayList<Float> data, float p){
 		int n = data.size();  
 		Collections.sort(data);  
 		float px =  p*(n-1);  
 		int i = (int)java.lang.Math.floor(px);  
 		Float g = px - i;  
-		if(g==0){   
+		if(g==0){
 			return data.get(i);  
 		}else{  
 			return ((1-g)*data.get(i)+g*data.get(i+1));  
 		}  
 	} 
-
+	 
+	/**
+	 * Calculate the p quantile
+	 * @param data
+	 * @param p 0-1
+	 * @return avg max
+	 */
+	public float[] avgAndMax(ArrayList<Float> data){
+		float[] res=new float[2];
+		int n = data.size();  
+		float sum=0.0f;
+		float max=-1f;
+		for(float d:data){
+			sum+=d;
+			max=d>max?d:max;
+		}
+		res[0]=n==0?0:sum/n;
+		res[1]=max;
+		return res;
+	} 
 	/**
 	 * float reserve two decimal fractions
 	 * 51.1f->51.10f
@@ -143,8 +162,7 @@ public class DataFormats {
 	public static void main(String[] a) {
 		ArrayList<Float> aa=new ArrayList<Float>();
 		aa.add(0.5f);
-		aa.add(0.1f);
-		System.out.println(DataFormats.getInstance().percentile(aa,0.99f));
+		System.out.println(DataFormats.getInstance().percentile(aa,0.95f));
 	}
 
 }

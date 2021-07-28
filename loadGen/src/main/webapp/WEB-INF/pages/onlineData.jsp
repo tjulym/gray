@@ -25,9 +25,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="chart">
 			<div id="web" style="width: 1250px; height: 350px; position: absolute; left: 50px; top: 0px;"></div>
 	 	</div>
-		<div id="AvgDiv" style="width: 50px; height: 50px; position: absolute; left: 1150px; top: 13px;">Avg99th:<span id="avg"></span>ms</div>
-		<div id="QpsDiv" style="width: 150px; height: 50px; position: absolute; left: 1140px; top: 360px;">AvgRPS:<span id="avg_rps"></span>&nbsp;&nbsp;AvgQPS:<span id="avg_qps"></span>&nbsp;&nbsp;SR:<span id="serviceRate"></span>%</div>
-		<div id="QpsDiv" style="width: 150px; height: 50px; position: absolute; left: 1140px; top: 380px;">realRPS:<span id="real_rps"></span>&nbsp;&nbsp;realQPS:<span id="real_qps"></span></div>
+		<div id="AvgDiv" style="width: 50px; height: 50px; position: absolute; left: 1000px; top: 13px;">Avg99th:<span id="avg99th"></span>&nbsp;&nbsp;AvgAvg:<span id="avgAvg"></span>&nbsp;&nbsp;ms</div>
+		<div id="QpsDiv" style="width: 150px; height: 50px; position: absolute; left: 1100px; top: 360px;">TotalRPS:<span id="avg_rps"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TotalQPS:<span id="avg_qps"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SR:<span id="serviceRate"></span>%</div>
+		<div id="RpsDiv" style="width: 150px; height: 50px; position: absolute; left: 1100px; top: 380px;">realRPS:<span id="real_rps"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;realQPS:<span id="real_qps"></span></div>
 	</div>
 	<script type="text/javascript" src="statics/js/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="statics/js/highcharts.js"></script>
@@ -52,52 +52,60 @@ Highstock.setOptions({
     var elementRealQps=document.getElementById('real_qps');
     var elementRealRps=document.getElementById('real_rps');
     var elementSR=document.getElementById('serviceRate');
-    var elementAvg=document.getElementById('avg');
+    var elementAvg99th=document.getElementById('avg99th');
+    var elementAvgAvg=document.getElementById('avgAvg');
 $(document).ready(function() {
 	Highcharts.chart('web',{
         chart: {
-            type: 'line',//scatter
+            type: 'scatter',//scatter
             zoomType: 'x',
             events: {
                 load: function (){
-                    var series = this.series[0]; 
-                    var x,queryTime,real_qps,real_rps,avg_rps,avg_qps,avg,serviceRate;
+                    var series99th = this.series[0]; 
+                    var seriesAvg = this.series[1]; 
+                    var x,queryTime99th,queryTimeAvg,real_qps,real_rps,avg_rps,avg_qps,avg,serviceRate;
                     var serviceId=${serviceId};
                     setInterval(function (){
                     	$.ajax({
             				async:true,
             				type:"get",
-            				url:"getOnlineQueryTime.do",
+            				url:"getOnlineWindowAvgQueryTime.do",
             				data:{serviceId:serviceId},
         					dataType:"json",
             				success:function(returned){
             					if(returned!=null&&returned!=""){
             						x = returned[0].generateTime;
-            						queryTime = returned[0].queryTime99th;
+            						queryTime99th = returned[0].queryTime99th;
+            						queryTimeAvg = returned[0].queryTimeAvg;
     							    avg_qps = returned[0].avgQps;
     							    avg_rps = returned[0].avgRps;
     							    real_qps = returned[0].realQps;
     							    real_rps = returned[0].realRps;
-    							    serviceRate = returned[0].windowAvgServiceRate;
-    							    avg = returned[0].OnlineAvgQueryTime;
+    							    serviceRate = returned[0].totalAvgServiceRate;
+    							    avg99th = returned[0].windowAvg99thQueryTime;
+    							    avgAvg = returned[0].windowAvgAvgQueryTime;
             						if(lastcollecttime==null){//如果第一次判断 直接添加点进去
-      			            	    	 series.addPoint([x,queryTime], true, true); 
+            							 series99th.addPoint([x,queryTime99th], true, true); 
+            							 seriesAvg.addPoint([x,queryTimeAvg], true, true); 
       			            	    	 elementAvgRps.innerHTML=avg_rps;
       			            	    	 elementAvgQps.innerHTML=avg_qps;
       			            	    	 elementRealRps.innerHTML=real_rps;
      			            	    	 elementRealQps.innerHTML=real_qps;
       			            	    	 elementSR.innerHTML=serviceRate;
-      			            	    	 elementAvg.innerHTML=avg;
+      			            	    	 elementAvg99th.innerHTML=avg99th;
+      			            	    	 elementAvgAvg.innerHTML=avgAvg;
       			            	    	 lastcollecttime = x;
       			            	    }else{ 
       			            	    	if(lastcollecttime<x){//如果不是第一次判断，则只有上次时间小于当前时间时才添加点
-      			            	    		series.addPoint([x,queryTime], true, true); 
+      			            	    		series99th.addPoint([x,queryTime99th], true, true); 
+      			            	    		seriesAvg.addPoint([x,queryTimeAvg], true, true); 
       			            	    		elementAvgRps.innerHTML=avg_rps;
          			            	    	elementAvgQps.innerHTML=avg_qps;
          			            	    	elementRealRps.innerHTML=real_rps;
         			            	    	elementRealQps.innerHTML=real_qps;
          			            	    	elementSR.innerHTML=serviceRate;
-         			            	    	elementAvg.innerHTML=avg;
+         			            	    	elementAvg99th.innerHTML=avg99th;
+         			            	    	elementAvgAvg.innerHTML=avgAvg;
          			            	    	lastcollecttime = x;
       			            	    	}
       			            	    } 
@@ -127,17 +135,17 @@ $(document).ready(function() {
             text: 'online query latency'
         },
         legend: {                                                                    
-            enabled: false                                                           
+            enabled: true                                                           
         } ,
         yAxis: {
             title: {
-                text: '99thLatencyPerSecond/ms'
+                text: 'Latency (ms)'
             },
         },
         tooltip: {
             formatter:function(){
                 return'<strong>'+this.series.name+'</strong><br/>'+
-                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S.%L',this.x)+'<br/>'+'99thLatencyPerSecond：'+this.y+' ms';
+                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S.%L',this.x)+'<br/>'+'Lat：'+this.y+' ms';
             },
         },
         series: [${seriesStr}]

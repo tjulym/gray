@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class DateFormats {
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddhhmmssSSS");
-
+	private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssSSS");
 	private Calendar calendar = Calendar.getInstance();
 	
 	private static DateFormats dateFormat=null;
@@ -56,7 +56,7 @@ public class DateFormats {
 	public String getNowDate1(){
 		Date d=new Date();
 		try{
-			return sdf1.format(d);
+			return sdf2.format(d);
 		}catch(Exception e){
 			return "";
 		}
