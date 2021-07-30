@@ -1,9 +1,9 @@
 # Load generator
-The load generator is a Java maven project which is implemented using httpclient+threadpool that works in [open-loop](https://ieeexplore_ieee.xilesou.top/abstract/document/7581261/) [1], it has a web GUI for the realtime latency watch (e.g., 99th tail-latency, QPS, RPS, etc.). Meanwhile, the load generator provides RMI interface for external call and supports dynamically changeable request loads
+The load generator is a maven project writtern with Java 1.8, it works in open-loop[1] mode and uses httpclient and threadpool as the key components in its implementation. It also has a web GUI to show the realtime latency changes (99th tail-latency, QPS, RPS, etc.). Meanwhile, the load generator provides RMI interface for external call and supports dynamic worload during the evaluation.
 
-* support thousands level concurrent request per second in single node
-* support web GUI for real-time latency watch
-* support dynamiclly changeable QPS in open-loop
+* support thousands of concurrent requests per second in single node
+* support web GUI for real-time latency monitoring
+* support dynamic workload in open-loop
 * support RMI interface for external call
 
 ##  Code architecture

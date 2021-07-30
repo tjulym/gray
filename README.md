@@ -44,10 +44,10 @@ python models/algorithm/plots_imports_all.py
 to show the importance of 16 metrics under all combinations of workload and server.
 
 ## Scheduler
-The example of scheduling is in scheduler/. Run
+It's quite hard to show the whole system, so we provide an example of binary-search scheduling algorithm instead. The example uses randomly generated states of servers and workloads. And it invokes the actual RFR model trained above for checking SLA violation. Run
 ```bash
 cd scheduler/src
 javac util/test/GsightScheduler.java
 java util.test.GsightScheduler
 ```
-to show the example process of scheduling.
+and it will show the scheduling result.
