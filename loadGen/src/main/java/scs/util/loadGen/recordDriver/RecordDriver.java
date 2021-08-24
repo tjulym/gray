@@ -1,5 +1,6 @@
 package scs.util.loadGen.recordDriver;
 
+import scs.util.loadGen.threads.RecordExecThread;
 import scs.util.repository.Repository;
 
 public class RecordDriver{

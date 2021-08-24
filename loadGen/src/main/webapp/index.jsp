@@ -13,9 +13,11 @@ welcome to the load generator page!
 <br>follow the links below to config and test
 
 <br><a href="goOnlineQuery.do?serviceId=0" target="_blank">turn to the GUI page, please wait a few time</a>
-<br><a href="startOnlineQuery.do?intensity=1&serviceId=0" target="_blank">start the load generator</a>
+<br><a href="startOnlineQuery.do?intensity=1&serviceId=0&concurrency=0" target="_blank">start the load generator</a>
 <br><a href="stopOnlineQuery.do?serviceId=0" target="_blank">stop the load generator</a>
 <br><a href="setIntensity.do?intensity=10&serviceId=0" target="_blank">dynamically change the request number per second</a>
+<br><a href="getLoaderGenQuery.do" target="_blank">get the realtime statistics of all requests</a>
+
   
 </body>
 </html>

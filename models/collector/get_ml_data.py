@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     start_BE()
     plans = set()
-    while len(plans) < 400:
+    while len(plans) < 10:
         print("Exp", len(plans)+1)
 
         plan_l = np.random.randint(0, 2, num_LCs + num_BEs)
