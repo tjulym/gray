@@ -1,4 +1,4 @@
-# Source Code for Gray Interference - Open Research Objects Version
+# Source Code for Partial Interference
 ---
 ## Benchmark Installation
 1. Deployment guide of OpenFaaS for Kubernetes is available here: https://docs.openfaas.com/deployment/kubernetes/.
@@ -8,7 +8,7 @@ Notice: this operation takes some time.
 We can also build & deploy functions according to the description below: https://docs.openfaas.com/cli/build/.
 
 ## Workload Generator Installation
-Guidance is available here: https://github.com/tjulym/gray/blob/SC21ORO/loadGen/README.md.
+Guidance is available here: https://github.com/tjulym/gray/tree/main/loadGen/README.md.
 
 Notice: Be sure that OpenFaaS functions and workload generator work well before running thefollowing script. The project LoadGenSimClient cannot work if the LoadGen has not yet been deployed.
 
