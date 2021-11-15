@@ -89,6 +89,6 @@ def handle(req_id):
     """
     u1 = random.randint(1, 1000)
     u2 = (u1+1) % 1000
-    req = '{"req_id": '+str(req_id)+', "media_ids":"dog777.png,dog7777.png", "media_types":"png,png","media_urls":"http://192.168.1.109/file/dog.jpg,http://192.168.1.109/file/dog.jpg", "user_id": '+str(u1)+', "username":"username_'+str(u1)+'","text":"hello @username_'+str(u2)+', we like http://baidu.com and http://google.com http://baidu.com/s/search http://baidu.com/s/search&dog.jpg baidu.com/s/search&dog.jpg", "post_type": 0}'
+    req = '{"req_id": '+str(req_id)+', "media_ids":"test1.png,test2.png", "media_types":"png,png","media_urls":"http://127.0.0.1/file/test1.png,http://127.0.0.1/file/test2.jpg", "user_id": '+str(u1)+', "username":"username_'+str(u1)+'","text":"hello @username_'+str(u2)+' http://065GYnDbI4dA8Xoxy2u7EHMafPSkWBmQVv9COjLeihrT1Kqgsw http://3TC7geaH9wQhRGEy8kKYSIO2ZPs6i1nvp4NlMDBFqt5UWmdVXJ http://idqwIjBsPe8T6gcRtGyOSWalLFN4DHv1U3h0xfrQYoMzXn5kZ9 http://d8fCt3vGHY4iU967S0hTFy2kRwgraOAmecZBJWVpzQPsIlqbDX", "post_type": 0}'
 
     return sn_flow(req)
