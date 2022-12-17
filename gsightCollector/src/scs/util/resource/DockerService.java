@@ -115,7 +115,7 @@ public class DockerService {
 			while (((err = br.readLine()) != null||(line = input.readLine()) != null)) {
 				if(err==null){
 					ContainerMetricesBean record = new ContainerMetricesBean();
-					//System.out.println(line);
+					System.out.println(line);
 					String[] split = line.split(":");
 
 					record.setCollectTime(System.currentTimeMillis());

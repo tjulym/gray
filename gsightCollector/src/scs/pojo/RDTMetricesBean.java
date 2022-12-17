@@ -8,7 +8,6 @@ package scs.pojo;
 public class RDTMetricesBean {
 	private float ipc;
 	private float llc;
-	private float llcMiss;
 	private float memBandwidth;
 	
 	public float getIpc() {
@@ -16,12 +15,6 @@ public class RDTMetricesBean {
 	}
 	public float getLlc() {
 		return llc;
-	}
-	public float getLlcMiss() {
-		return llcMiss;
-	}
-	public void setLlcMiss(float llcMiss) {
-		this.llcMiss = llcMiss;
 	}
 	public float getMemBandwidth() {
 		return memBandwidth;

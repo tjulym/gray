@@ -1,5 +1,8 @@
 package scs.util.utilitization; 
 
+import java.io.FileWriter;
+import java.io.IOException; 
+import scs.util.repository.Repository;
 import scs.util.tools.DataFormats;
 import scs.util.tools.DateFormats;  
 
@@ -9,7 +12,7 @@ import scs.util.tools.DateFormats;
  *
  */
 public class LatencyRecordController extends Thread{
-	//private final int SLEEP_TIME=1000;
+	private final int SLEEP_TIME=1000;
 
 	DataFormats dataFormats=DataFormats.getInstance();
 	DateFormats dateFormats=DateFormats.getInstance();

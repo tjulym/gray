@@ -14,7 +14,7 @@ public class ContainerBean {
 	private List<Integer> logicCoreList; //分配的cpu cores
 	private String logicCoreStr;
 	private int memoryLimit; //分配的内存大小 单位:MB 
-
+	
 	public String getTaskType() {
 		return taskType;
 	}
@@ -43,21 +43,11 @@ public class ContainerBean {
 		return logicCoreStr;
 	}
 	public void setLogicCoreList(String cpuStr) {
-		List<Integer> list=new ArrayList<Integer>();
+		 List<Integer> list=new ArrayList<Integer>();
 		if(cpuStr!=null&&cpuStr.contains(",")){//解析包含','的cpu字符串
 			String[] cpus=cpuStr.split(",");
 			for(int i=0;i<cpus.length;i++){
-				if(cpus[i]!=null&&cpus[i].contains("-")){//解析包含'-'的cpu字符串
-					String[] subCpus=cpus[i].split("-");
-					int start=Integer.parseInt(subCpus[0]);
-					int end=Integer.parseInt(subCpus[1]);
-					for(int j=start;j<=end;j++){ 
-						list.add(j);
-					}
-				}else{
-					list.add(Integer.parseInt(cpus[i])); 
-				}
-
+				list.add(Integer.parseInt(cpus[i])); 
 			}
 		}else if(cpuStr!=null&&cpuStr.contains("-")){//解析包含'-'的cpu字符串
 			String[] cpus=cpuStr.split("-");
@@ -66,8 +56,6 @@ public class ContainerBean {
 			for(int i=start;i<=end;i++){ 
 				list.add(i);
 			}
-		}else{
-			list.add(Integer.parseInt(cpuStr));
 		}
 		this.logicCoreStr=cpuStr;
 		this.logicCoreList = list;
@@ -78,25 +66,25 @@ public class ContainerBean {
 	public void setMemoryLimit(int memoryLimit) {
 		this.memoryLimit = memoryLimit;
 	}
-
+	 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("ContainerBean [taskType=");
 		builder.append(taskType);
 		builder.append(", containerName=");
-		builder.append(containerName.substring(0,containerName.length()/4));
+		builder.append(containerName);
 		builder.append(", pid=");
 		builder.append(pid);
-		builder.append(", logicCoreStr=");
-		builder.append(logicCoreStr);
+		builder.append(", logicCoreList=");
+		builder.append(logicCoreList);
 		builder.append(", memoryLimit=");
 		builder.append(memoryLimit);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	 
 
-
-
-
+	 
 }	

@@ -68,7 +68,7 @@ public class NetMonitor {
 			while (((err = br.readLine()) != null||(line = input.readLine()) != null)) {
 				if(err==null){
 					if(line.contains("eth0")){
-						//System.out.println(line);
+						System.out.println(line);
 						String[] netSplit = line.split("\\s+");
 						netIO[0] = Float.parseFloat(netSplit[2]) / 1024f / 1024f;
 						netIO[1] = Float.parseFloat(netSplit[10]) / 1024f / 1024f;

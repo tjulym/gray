@@ -30,11 +30,10 @@ public class CpuMonitor {
 		float[] RDTMetricesList=new float[5];
 		String[] datas=new String[6];
 		int count=0;
-		int ipcCount=0;
 		try {
 			String line = null,err;
 			Process process = Runtime.getRuntime().exec("pqos -t "+durationTime+" -m all:"+"["+coreStr+"]");
-			//System.out.println(("pqos -t "+durationTime+" -m all:"+"["+coreStr+"]"));
+			System.out.println(("pqos -t "+durationTime+" -m all:"+"["+coreStr+"]"));
 			BufferedReader br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 			InputStreamReader isr = new InputStreamReader(process.getInputStream());
 			LineNumberReader input = new LineNumberReader(isr); 
@@ -45,20 +44,13 @@ public class CpuMonitor {
 					} else {
 						datas=line.trim().split("\\s+");
 						if (datas.length==6){
-							if(datas[1].length()<=4&&!datas[1].equals("0.00")){
-								float temp=Float.parseFloat(datas[1]);
-								if(temp>0.5&&temp<2.5){
-									RDTMetricesList[0]+=temp;
-									ipcCount++;
-								}
-								
-							}
+							RDTMetricesList[0]+=Float.parseFloat(datas[1]);
 							RDTMetricesList[1]+=Float.parseFloat(datas[2].replace("k",""));
 							RDTMetricesList[2]+=Float.parseFloat(datas[3]);
 							RDTMetricesList[3]+=Float.parseFloat(datas[4]);
 							RDTMetricesList[4]+=Float.parseFloat(datas[5]);
 							count++;
-							//System.out.println(count+" "+line);
+							System.out.println(count+" "+line);
 						}
 					}
 				}else{
@@ -68,8 +60,7 @@ public class CpuMonitor {
 //			for (int i=0;i<result.length;i++){
 //				System.out.println("avg="+(result[i]/count));
 //			}
-			rmBean.setIpc(RDTMetricesList[0]/ipcCount);
-			rmBean.setLlcMiss(RDTMetricesList[1]/count*1024f);
+			rmBean.setIpc(RDTMetricesList[0]/count);
 			rmBean.setLlc(RDTMetricesList[2]/count/1024f);
 			rmBean.setMemBandwidth((RDTMetricesList[3]+RDTMetricesList[4])/count);
 		

@@ -2,6 +2,7 @@ package scs.util.tools;
 
  
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +24,9 @@ public class DataFormats {
 		return dataFormat;
 	}
 	public float subFloat(float value,int length){
+		System.out.println(value);
 		BigDecimal bd=new BigDecimal((double)value);    
-		bd=bd.setScale(length,4);    
+		bd=bd.setScale(length,RoundingMode.HALF_UP);
 		return bd.floatValue();   
 	}
 	/**

@@ -18,8 +18,7 @@ public class PerfMetricesBean implements Serializable{
 	private long tlbInstructionMPKI;
 	private long branchMPKI;
 	//private long l3MPKI;
-	private float mlp;
-	private float IPC;
+	private float mlp; 
 	 
 	public PerfMetricesBean(){
 	}
@@ -56,9 +55,6 @@ public class PerfMetricesBean implements Serializable{
 //		return l3MPKI;
 //	}
 
-
-	public float getIPC() { return IPC; }
-
 	public float getMlp() {
 		return mlp;
 	}
@@ -92,14 +88,13 @@ public class PerfMetricesBean implements Serializable{
 	}
 
 //	public void setL3MPKI(long l3mpki) {
-//		l3MPKI = l3mpki;
+//		this.l3MPKI = l3mpki;
 //	}
 
 	public void setMlp(float mlp) {
 		this.mlp = mlp;
 	}
 
-	public void setIPC(float IPC) { this.IPC = IPC; }
 	 
 	@Override
 	public String toString() {
@@ -122,11 +117,8 @@ public class PerfMetricesBean implements Serializable{
 //		builder.append(l3MPKI);
 		builder.append(", mlp=");
 		builder.append(mlp);
-		builder.append(", IPC=");
-		builder.append(IPC);
 		builder.append("]");
 		return builder.toString();
-	}
-
-
+	} 
+	
 }

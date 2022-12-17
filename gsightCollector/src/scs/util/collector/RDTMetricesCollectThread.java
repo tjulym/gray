@@ -30,11 +30,13 @@ public class RDTMetricesCollectThread extends Thread{
 	}
 	@Override
 	public void run(){
-		//System.out.println("RDTMetricesCollectThread start for type="+containerType+" coreStr="+containerCoreStr+"...");
+		System.out.println("RDTMetricesCollectThread start for type="+containerType+" coreStr="+containerCoreStr+"...");
 		int timeLength=durationTime/1000;
 		try {
 			begin.await();
-		
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 
 		/**
 		 * 获取指标信息
@@ -48,18 +50,15 @@ public class RDTMetricesCollectThread extends Thread{
 			AppMetricesBean amBean=Repository.appFinalMetricsMap.get(containerType);
 			amBean.setMemBandwidth(rBean.getMemBandwidth());
 			amBean.setLlc(rBean.getLlc());
-			amBean.setL3MISS(rBean.getLlcMiss());
-//			if(Repository.flag==1)
-//				System.out.println("RDTMetricesCollectThread: update appFinalMetricsMap"+containerType+" "+amBean.toString());
+			amBean.setIpc(rBean.getIpc());
+
+			System.out.println("ContainerMetricesCollectThread: update appFinalMetricsMap"+containerType+" "+amBean.toString());
 		}
 
-	
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally{
-			Repository.flag--;
-			System.out.println("RDTMetricesCollectThread finished for type="+containerType+" coreStr="+containerCoreStr+"...");
-		}
+		Repository.flag--;
+		System.out.println("RDTMetricesCollectThread finished for type="+containerType+" coreStr="+containerCoreStr+"...");
+
+
 	}
 }
 

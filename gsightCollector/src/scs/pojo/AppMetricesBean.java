@@ -9,7 +9,7 @@ import scs.util.tools.DataFormats;
  * @author DELL
  *
  */
-public class AppMetricesBean implements Serializable {
+public class AppMetricesBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private DataFormats dataFormats;
@@ -20,8 +20,7 @@ public class AppMetricesBean implements Serializable {
 	private long tlbDataMPKI;
 	private long tlbInstructionMPKI;
 	private long branchMPKI;
-	private float l3MPKI;
-	private float L3Miss;
+	private long l3MPKI;
 	private float mlp; 
 	
 	private float cpuUtilRate;
@@ -64,11 +63,8 @@ public class AppMetricesBean implements Serializable {
 		return branchMPKI;
 	}
 
-	public float getL3MPKI() {
+	public long getL3MPKI() {
 		return l3MPKI;
-	}
-	public float getL3Miss() {
-		return L3Miss;
 	}
 
 	public float getMlp() {
@@ -131,15 +127,12 @@ public class AppMetricesBean implements Serializable {
 		this.branchMPKI = branchMPKI;
 	}
 
-	public void setL3MPKI(float l3mpki) {
-		l3MPKI = dataFormats.subFloat(l3mpki, 4);
+	public void setL3MPKI(long l3mpki) {
+		l3MPKI = l3mpki;
 	}
 
-	public void setL3MISS(float L3miss) {
-		L3Miss = L3miss;
-	}
 	public void setMlp(float mlp) {
-		this.mlp = dataFormats.subFloat(mlp, 4);
+		this.mlp = mlp;
 	}
 
 	public void setCpuUtilRate(float cpuUtilRate) {
@@ -159,7 +152,7 @@ public class AppMetricesBean implements Serializable {
 	}
 
 	public void setIpc(float ipc) {
-		this.ipc = dataFormats.subFloat(ipc, 2);
+		this.ipc = ipc;
 	}
 
 	public void setDiskIO(float diskIO) {
@@ -197,15 +190,15 @@ public class AppMetricesBean implements Serializable {
 		builder.append(memUtilRate);
 		builder.append(", memBandwidth=");
 		builder.append(memBandwidth);
-		builder.append("MB/s, llc=");
+		builder.append(", llc=");
 		builder.append(llc);
-		builder.append("MB, ipc=");
+		builder.append(", ipc=");
 		builder.append(ipc);
 		builder.append(", diskIO=");
 		builder.append(diskIO);
-		builder.append("MB/s, networkIO=");
+		builder.append(", networkIO=");
 		builder.append(networkIO);
-		builder.append("MB/s]");
+		builder.append("]");
 		return builder.toString();
 	} 
 	

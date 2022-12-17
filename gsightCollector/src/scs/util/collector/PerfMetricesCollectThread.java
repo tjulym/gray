@@ -6,7 +6,7 @@ import java.util.concurrent.CountDownLatch;
 import scs.pojo.AppMetricesBean;
 import scs.pojo.PerfMetricesBean;
 import scs.util.repository.Repository;
-import scs.util.resource.perf.PerfMonitorIpc;  
+import scs.util.resource.perf.PerfMonitor;  
 /**
  * 请求发送线程,发送请求并记录时间
  * @author yanan
@@ -16,7 +16,7 @@ public class PerfMetricesCollectThread extends Thread{
 	private ArrayList<String> pidList;
 	private int durationTime;//2000ms
 	private CountDownLatch begin;
-	private PerfMonitorIpc perfMonitor;
+	private PerfMonitor perfMonitor;
 	private String containerType;
 
 	/**
@@ -27,11 +27,11 @@ public class PerfMetricesCollectThread extends Thread{
 		this.durationTime=durationTime;
 		this.begin=begin;
 		this.containerType=containerType;
-		this.perfMonitor=PerfMonitorIpc.getInstance();
+		this.perfMonitor=PerfMonitor.getInstance();
 	}
 	@Override
 	public void run(){
-		//System.out.println("PerfMetricesCollectThread start for pidList="+pidList.toString()+"...");
+		System.out.println("PerfMetricesCollectThread start for pidList="+pidList.toString()+"...");
 		int timeLength=durationTime/1000;
 		try {
 			begin.await();
@@ -42,7 +42,7 @@ public class PerfMetricesCollectThread extends Thread{
 		/**
 		 * 获取指标信息
 		 */
-		PerfMetricesBean pBean=perfMonitor.getPerfMetricesInfo(pidList, timeLength, containerType);
+		PerfMetricesBean pBean=perfMonitor.getPerfMetricesInfo(pidList, timeLength);
 		/**
 		 * 统计信息
 		 */
@@ -56,13 +56,10 @@ public class PerfMetricesCollectThread extends Thread{
 			amBean.setTlbDataMPKI(pBean.getTlbDataMPKI());
 			amBean.setTlbInstructionMPKI(pBean.getTlbInstructionMPKI());
 			amBean.setBranchMPKI(pBean.getBranchMPKI());
-			amBean.setIpc(pBean.getIPC());
+			//amBean.setL3MPKI(pBean.getL3MPKI());
 			amBean.setMlp(pBean.getMlp());
 
-//			if(Repository.flag==1){
-//				System.out.println("PerfMetricesCollectThread: update appFinalMetricsMap"+containerType+" "+amBean.toString());
-//			}
-			
+			System.out.println("PerfMetricesCollectThread: update appFinalMetricsMap"+containerType+" "+amBean.toString());
 		}
 		
 		

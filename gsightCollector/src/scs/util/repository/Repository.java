@@ -42,8 +42,6 @@ public class Repository{
 	public static int flag=0;
 	public static Map<String, ContainerBean> containerMap=new HashMap<String, ContainerBean>();//<key=ContainerName, value=ContainerBean>
 	public static Map<String, AppMetricesBean> appFinalMetricsMap=new HashMap<String, AppMetricesBean>();//<key="LC", value=AppMetricesBean>
-	public static Map<String, Long> instructionMap=new HashMap<String, Long>();
-	
 	
 	public static String loaderRmiUrl="http://192.168.1.129:8080";
 	public static String resultFilePath="";
