@@ -15,13 +15,15 @@ Notice: Be sure that OpenFaaS functions and workload generator work well before 
 ## Metrics Collector
 Compile gray/gsightCollector/ to generate a runnable jar package. Then, run
 ```bash
-java -jar collector.jar func_name interval result_dir_name 
+java -jar collector.jar LC.pod_name interval result_dir_name 192.168.1.1 2222 1 48833
 ```
-to collect metrics of corresponding functions under their solo-run. Run 
+to collect metrics of corresponding functions under their solo-run. 
+Notice: make sure Intel RDT is enabled and an allocation setting is applied to the pod or container (e.g., cpuset-cpus).
+Run 
 ```bash
 ./models/collector/start.sh
 ```
-and it will create a csv file that stores the metrics under co-locating. You can edit start.sh to set the QPS of LS workloads, edit models/collector/get_ml_data.py to set the amount of data to be collected, and edit models/collector/runBEPara.py to configure tasks that co-locate with the LS of social network.
+and it will create a csv file that stores the metrics under a co-locating example. You can edit start.sh to set the QPS of LS workloads, edit models/collector/get_ml_data.py to set the amount of data to be collected, and edit models/collector/runBEPara.py to configure tasks that co-locate with the LS of social network.
 
 ## Model Training
 The initial training dataset is in models/algorithm/data/. Run
